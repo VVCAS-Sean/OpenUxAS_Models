@@ -146,13 +146,11 @@ let
      (m_status = OnHold and response_message = divert_hsa and m_RoW_status = false))
      provided (HadToResolveConflict);
 
+     check "If didn't have to resolve conflict, either OnHold or OnMission with
+            no messages sent or sent a mission command to return to OnMission. /n"
+    (
+        (response_message = None and (m_status = OnHold or m_status = OnMission))
+        xor (response_message = return_mission_command and m_status = OnMission)
+    ) provided (not HadToResolveConflict);
 
-    check "Status determination if had to resolve conflict vs not having to 
-           resolve conflict. /n"
-    (if not HadToResolveConflict then (response_message = None and (m_status = 
-    OnHold or m_status = OnMission )) xor 
-    (response_message = return_mission_command and m_status = OnMission) else 
-    (m_status = OnHold and response_message = None and m_RoW_status = true) xor 
-    (m_status = OnHold and response_message = divert_hsa and 
-    m_RoW_status = false));  
 tel
