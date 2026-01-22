@@ -153,4 +153,16 @@ let
         xor (response_message = return_mission_command and m_status = OnMission)
     ) provided (not HadToResolveConflict);
 
+    check "If had to resolve conflict and sent an hsa command, that command is 
+            the result of successfully finding a divert heading, speed, or 
+            altitude deconflict, enacting a fallback behavior, or finding no 
+            recourse. /n"
+            (
+                m_Divert_resolution_quality = divert_altitude_successful xor 
+                m_Divert_resolution_quality = divert_heading_successful xor 
+                m_Divert_resolution_quality = divert_speed_successful xor  
+                m_Divert_resolution_quality = fallback xor 
+                m_Divert_resolution_quality = no_recourse) 
+                provided 
+                (HadToResolveConflict and response_message = divert_hsa);
 tel
