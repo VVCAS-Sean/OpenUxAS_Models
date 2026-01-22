@@ -162,7 +162,6 @@ let
                 m_Divert_resolution_quality = divert_heading_successful xor 
                 m_Divert_resolution_quality = divert_speed_successful xor  
                 m_Divert_resolution_quality = fallback xor 
-                m_Divert_resolution_quality = no_recourse) 
-                provided 
+                m_Divert_resolution_quality = no_recourse) provided 
                 (HadToResolveConflict and response_message = divert_hsa);
 tel
